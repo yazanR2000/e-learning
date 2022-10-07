@@ -2,14 +2,29 @@ import 'package:flutter/material.dart';
 
 import '../api/exam_answers.dart';
 
-
 class GradeDialog extends StatelessWidget {
   final Function _checkAnswers;
   GradeDialog(this._checkAnswers);
   final ExamAnswers _examAnswers = ExamAnswers.getInstance();
+  String _evaluateLevel(int grade) {
+    String level = "Your level is : ";
+    if (grade <= 5) {
+      level += "Weak";
+    } else if (grade <= 10) {
+      level += "Good";
+    } else {
+      level += "Intermediate";
+    }
+    return level;
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      //backgroundColor: const Color(0xffF0F5F9),
       content: Container(
         height: 200,
         child: Column(
@@ -20,14 +35,24 @@ class GradeDialog extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            const Text("Your grade is"),
-            Text("${_examAnswers.grade}/15"),
+            Text(
+              "Your grade is",
+              
+            ),
+            Text(
+              "${_examAnswers.grade}/15",
+              
+            ),
+            Text(
+              _evaluateLevel(_examAnswers.grade),
+              
+            ),
           ],
         ),
       ),
       actions: [
         ElevatedButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.of(context).pop();
             _checkAnswers();
           },

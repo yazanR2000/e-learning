@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import './exam.dart';
 const String baseUrl = "https://e-learning-9c70e-default-rtdb.firebaseio.com";
 
 class Course {
@@ -59,4 +59,13 @@ class Tutorial {
       throw "err";
     }
   }
+}
+
+class Exams {
+  static final Map<String,Exam> _exams = {
+    'Flutter':Exam("Flutter"),
+    'English':Exam("English"),
+    'C++':Exam("C++")
+  };
+  static Map<String,Exam> get exams => _exams;
 }

@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-const String baseUrl = "https://ltuc-exams-default-rtdb.firebaseio.com";
+import './base_url.dart';
+
 class Question {
   final String _qId,question,_subject;
   Question(this._qId,this.question,this._subject);
@@ -11,6 +12,7 @@ class Question {
   bool didIFetchChoices = false;
   
   Future getChoices() async {
+    String? baseUrl = BaseUrl.baseUrl;
     if(didIFetchChoices){
       return;
     }
@@ -24,7 +26,7 @@ class Question {
           "answer" : value
         });
       });
-      _choices.shuffle();
+      //_choices.shuffle();
       didIFetchChoices = true;
     }catch(err){
       throw "err";

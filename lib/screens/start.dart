@@ -102,23 +102,25 @@ class _StartState extends State<Start> {
                 ),
                 Text(
                   signIn ? 'Sign In' : 'Sign Up',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 SizedBox(
                   height: signIn ? 0 : 20,
                 ),
                 AnimatedOpacity(
-                    duration: const Duration(milliseconds: 500),
-                    opacity: signIn ? 0 : 1,
-                    child: EditText(
-                      controller: name,
-                      icon: LineIcons.signature,
-                      hint: 'Name',
-                      pass: false,
-                    )),
+                  duration: const Duration(milliseconds: 500),
+                  opacity: signIn ? 0 : 1,
+                  child: EditText(
+                    controller: name,
+                    icon: LineIcons.signature,
+                    hint: 'Name',
+                    pass: false,
+                  ),
+                ),
                 SizedBox(
                   height: signIn ? 0 : 20,
                 ),
@@ -132,21 +134,24 @@ class _StartState extends State<Start> {
                   height: 20,
                 ),
                 EditText(
-                    icon: Icons.password,
-                    controller: password,
-                    hint: 'Password',
-                    pass: true),
+                  icon: Icons.password,
+                  controller: password,
+                  hint: 'Password',
+                  pass: true,
+                ),
                 if (signIn)
-                  Container(
-                      padding: const EdgeInsets.only(top: 20),
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: (() {}),
-                        child: Text(
-                          'Forgot password?',
-                          style: TextStyle(color: Colors.red[900]),
-                        ),
-                      )),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Forgot password ?",
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                              color: const Color(0xffF0F5F9),
+                            ),
+                      ),
+                    ),
+                  ),
                 SizedBox(
                   height: signIn ? 0 : 20,
                 ),
@@ -158,51 +163,92 @@ class _StartState extends State<Start> {
                       obscureText: showPassword,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                showPassword = !showPassword;
-                              });
-                            },
-                            icon: Icon(showPassword
+                          onPressed: () {
+                            setState(() {
+                              showPassword = !showPassword;
+                            });
+                          },
+                          icon: Icon(
+                            showPassword
                                 ? Icons.visibility
-                                : Icons.visibility_off)),
+                                : Icons.visibility_off,
+                          ),
+                        ),
                         prefixIcon: const Icon(LineIcons.doubleCheck),
                         hintText: 'Confirm password',
                       )),
                 ),
                 if (!signIn)
-                  Container(
-                      padding: const EdgeInsets.only(top: 20),
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: (() {}),
-                        child: Text(
-                          'Forgot password?',
-                          style: TextStyle(color: Colors.red[900]),
-                        ),
-                      )),
-                const SizedBox(
-                  height: 50,
-                ),
-                Container(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: (() {
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Forgot password ?",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2!
+                            .copyWith(color: const Color(0xffF0F5F9)),
+                      ),
+                    ),
+                  ),
+                // Container(
+                //     padding: const EdgeInsets.only(top: 20),
+                //     alignment: Alignment.centerRight,
+                //     child: GestureDetector(
+                //       onTap: (() {}),
+                //       child: Text(
+                //         'Forgot password?',
+                //         style: TextStyle(color: Colors.red[900]),
+                //       ),
+                //     )),
+                // const SizedBox(
+                //   height: 50,
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      signIn
+                          ? 'Don\'t have an account ?'
+                          : 'Already have an account ?',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2!
+                          .copyWith(color: const Color(0xffF0F5F9)),
+                    ),
+                    TextButton(
+                      onPressed: () {
                         setState(() {
                           signIn = !signIn;
                         });
-                      }),
+                      },
                       child: Text(
-                        signIn
-                            ? '  Don\'t have an account? Sign Up'
-                            : 'Already have an account? Sign In',
-                        style: TextStyle(color: Colors.red[900]),
+                        signIn ? "Sign Up" : "Sign In",
                       ),
-                    )),
+                    )
+                  ],
+                ),
+                // Container(
+                //   padding: const EdgeInsets.only(bottom: 10),
+                //   alignment: Alignment.center,
+                //   child: GestureDetector(
+                //     onTap: (() {
+                //       setState(() {
+                //         signIn = !signIn;
+                //       });
+                //     }),
+                //     child: Text(
+                //       signIn
+                //           ? '  Don\'t have an account? Sign Up'
+                //           : 'Already have an account? Sign In',
+                //       style: TextStyle(color: Colors.red[900]),
+                //     ),
+                //   ),
+                // ),
                 loading
-                    ? Padding(
-                        padding: const EdgeInsets.all(20),
+                    ? const Padding(
+                        padding: EdgeInsets.all(20),
                         child: CircularProgressIndicator(),
                       )
                     : ElevatedButton(

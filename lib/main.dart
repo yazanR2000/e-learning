@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './screens/home.dart';
 import './screens/selected_item_exam.dart';
 import './screens/course.dart';
+import './screens/course_tutorial.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,10 +22,11 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xff1E2022),
           titleTextStyle: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Color(0xffF0F5F9),
-              fontFamily: 'Kalam-Bold'),
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Color(0xffF0F5F9),
+            fontFamily: 'Kalam-Bold',
+          ),
           elevation: 0,
           iconTheme: IconThemeData(color: Color(0xffF0F5F9)),
         ),
@@ -41,11 +43,14 @@ class MyApp extends StatelessWidget {
                   ),
         ),
         primaryColor: Colors.red,
-        primarySwatch: Colors.red,
-        iconTheme: const IconThemeData(color: Colors.white),
+        //primarySwatch: Colors.red,
+        iconTheme: const IconThemeData(color: Color(0xffF0F5F9)),
         inputDecorationTheme: const InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderSide: BorderSide(
+              color: Color(0xffF0F5F9),
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -69,11 +74,28 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+
+        dialogTheme: DialogTheme(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          backgroundColor: const Color(0xffF0F5F9),
+          contentTextStyle: const TextStyle(
+            color: Color(0xff1E2022),
+            fontFamily: 'Poppins-Regular',
+          ),
+          titleTextStyle: const TextStyle(
+            color: Color(0xff1E2022),
+            fontSize: 20,
+            fontFamily: 'Kalam-Bold',
+          ),
+        ),
       ),
-      home: Start(),
+      home: const Start(),
       routes: {
         '/selected_item_exam': (context) => SelectedItemExam(),
         '/course': (context) => Course(),
+        '/course_tutorial' : (context) => CourseTutorial(),
       },
     );
   }

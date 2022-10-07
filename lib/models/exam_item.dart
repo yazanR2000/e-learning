@@ -1,6 +1,7 @@
 import '../api/exam.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../widgets/level_exam_dialog.dart';
 
 class ExamItem extends StatelessWidget {
   final Exam _exam;
@@ -29,8 +30,12 @@ class ExamItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context)
-            .pushNamed('/selected_item_exam', arguments: _exam);
+        showDialog(
+          context: context,
+          builder: (ctx) {
+            return LevelExamDialog(ctx, _exam);
+          },
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -63,8 +68,12 @@ class ExamItem extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed('/selected_item_exam', arguments: _exam);
+                        showDialog(
+                          context: context,
+                          builder: (ctx) {
+                            return LevelExamDialog(ctx, _exam);
+                          },
+                        );
                       },
                       icon: const FaIcon(
                         FontAwesomeIcons.play,
@@ -76,10 +85,10 @@ class ExamItem extends StatelessWidget {
                     child: ListTile(
                       title: Text(
                         _exam.subject,
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(color: const Color(0xff1E2022)),
                       ),
                       subtitle: Text(
-                        "15 question",
+                        "Level exam of 15 question",
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ),

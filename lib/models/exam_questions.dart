@@ -6,9 +6,11 @@ import '../api/answer.dart';
 import './question_choices.dart';
 import '../widgets/grade_dialog.dart';
 import '../api/course.dart';
+
 class ExamQuestions extends StatefulWidget {
   final Exam _exam;
-  ExamQuestions(this._exam);
+  final String _from;
+  ExamQuestions(this._exam, this._from);
 
   @override
   State<ExamQuestions> createState() => _ExamQuestionsState();
@@ -35,7 +37,8 @@ class _ExamQuestionsState extends State<ExamQuestions> {
     });
   }
 
-  Widget _trueFalseAnswer(int questionIndex, List<Map<String, dynamic>> choices) {
+  Widget _trueFalseAnswer(
+      int questionIndex, List<Map<String, dynamic>> choices) {
     int choiceNum = _examAnswers.asnwers[questionIndex].choiceNum;
     int trueIndex = choices.indexWhere((element) => element['answer'] == true);
     if (choiceNum == trueIndex) {
@@ -67,7 +70,9 @@ class _ExamQuestionsState extends State<ExamQuestions> {
                   _examAnswers.addAnswer(Answer(questions[index]));
                   return Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 50, horizontal: 30),
+                      vertical: 50,
+                      horizontal: 30,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -78,10 +83,10 @@ class _ExamQuestionsState extends State<ExamQuestions> {
                               text: TextSpan(
                                 text: 'Question ${index + 1}',
                                 style: Theme.of(context).textTheme.bodyText1,
-                                children: const [
+                                children: [
                                   TextSpan(
-                                    text: ' /15',
-                                    style: TextStyle(
+                                    text: ' /${questions.length}',
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10,
                                     ),
@@ -134,11 +139,16 @@ class _ExamQuestionsState extends State<ExamQuestions> {
                         onPressed: () {
                           _examAnswers.clearAswers();
                           _checkAnswers = false;
-                          Course course = Course.getInstance();
-                          course.course = widget._exam.subject;
-                          Navigator.of(context).pushReplacementNamed('/course');
+                          if (widget._from == "Course") {
+                            Navigator.of(context).pop();
+                          } else {
+                            Course course = Course.getInstance();
+                            course.course = widget._exam.subject;
+                            Navigator.of(context)
+                                .pushReplacementNamed('/course');
+                          }
                         },
-                        child: const Text("Go to course"),
+                        child: Text(widget._from == "Course" ? "Done" : "Go to course"),
                       ),
                     ),
                   ],
@@ -169,7 +179,8 @@ class _ExamQuestionsState extends State<ExamQuestions> {
             builder: (ctx) {
               return AlertDialog(
                 title: const Text("Submit Exam"),
-                content: const Text("Are you sure ?"),
+                content: const Text(
+                    "Are you sure you want to submit your answers ?"),
                 actions: [
                   TextButton(
                     onPressed: () {

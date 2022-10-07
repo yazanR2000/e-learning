@@ -18,12 +18,12 @@ class _SelectedItemExamState extends State<SelectedItemExam> {
 
   @override
   Widget build(BuildContext context) {
-    final Exam exam = ModalRoute.of(context)!.settings.arguments as Exam;
+    final Map<String,dynamic> fromScreen = ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
     return Scaffold(
       appBar: AppBar(
-        title: Text("${exam.subject} Quiz"),
+        title: Text("${fromScreen['exam'].subject} Quiz"),
       ),
-      body: ExamQuestions(exam),
+      body: ExamQuestions(fromScreen['exam'],fromScreen['from']),
     );
   }  
 }
