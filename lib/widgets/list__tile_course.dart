@@ -16,18 +16,18 @@ class ListTileCourse extends StatefulWidget {
 }
 
 class _ListTIleCourseState extends State<ListTileCourse> {
-  bool _checkBox = false;
+  // bool _checkBox = false;
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Checkbox(
-        onChanged: (value) {
-          setState(() {
-            _checkBox = value!;
-          });
-        },
-        value: _checkBox,
-      ),
+      // leading: Checkbox(
+      //   onChanged: (value) {
+      //     setState(() {
+      //       _checkBox = value!;
+      //     });
+      //   },
+      //   value: _checkBox,
+      // ),
       onTap: () {
         setState(() {
           widget.function(widget.expandedIndex, widget.index);

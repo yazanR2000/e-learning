@@ -30,10 +30,11 @@ class _TutorialsState extends State<Tutorials> {
         return Column(
           children: [
             ListTileCourse(
-                index: index,
-                expandedIndex: _expandedIndex,
-                title: widget._subjects[index].tutorial,
-                function: expandedFunction),
+              index: index,
+              expandedIndex: _expandedIndex,
+              title: widget._subjects[index].tutorial,
+              function: expandedFunction,
+            ),
             if (_expandedIndex == index)
               Container(
                 margin: const EdgeInsets.all(10),

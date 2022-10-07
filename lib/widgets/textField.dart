@@ -22,21 +22,26 @@ class _EditTextState extends State<EditText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-        controller: widget.controller,
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          suffixIcon: widget.pass
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      showPassword = !showPassword;
-                    });
-                  },
-                  icon: Icon(
-                      showPassword ? Icons.visibility : Icons.visibility_off))
-              : null,
-          prefixIcon: Icon(widget.icon),
-          hintText: widget.hint,
-        ));
+      controller: widget.controller,
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        suffixIcon: widget.pass
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    showPassword = !showPassword;
+                  });
+                },
+                icon: Icon(
+                  showPassword ? Icons.visibility : Icons.visibility_off,color: const Color(0xffF0F5F9)
+                ),
+              )
+            : null,
+        prefixIcon: Icon(widget.icon,color: const Color(0xffF0F5F9)),
+        hintText: widget.hint,
+        hintStyle: const TextStyle(color: Color(0xffF0F5F9)),
+      ),
+      style: const TextStyle(color: Color(0xffF0F5F9)),
+    );
   }
 }
