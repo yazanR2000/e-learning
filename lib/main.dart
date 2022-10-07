@@ -37,13 +37,12 @@ class MyApp extends StatelessWidget {
             color: Color(0xffF0F5F9),
             fontSize: 20,
           ),
-          bodyText2:
-              TextStyle(color: Color(0xff1E2022), fontFamily: 'Poppins-Regular'
-                  //fontSize: 20,
-                  ),
+          bodyText2: TextStyle(
+            color: Color(0xff1E2022),
+            fontFamily: 'Poppins-Regular',
+          ),
         ),
-        primaryColor: Colors.red,
-        //primarySwatch: Colors.red,
+
         iconTheme: const IconThemeData(color: Color(0xffF0F5F9)),
         inputDecorationTheme: const InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
@@ -55,7 +54,7 @@ class MyApp extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(20)),
             borderSide: BorderSide(
-              color: Colors.red,
+              color: Colors.blue,
             ),
           ),
         ),
@@ -95,7 +94,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/selected_item_exam': (context) => SelectedItemExam(),
         '/course': (context) => Course(),
-        '/course_tutorial' : (context) => CourseTutorial(),
+        '/course_tutorial': (context) => CourseTutorial(),
       },
     );
   }
