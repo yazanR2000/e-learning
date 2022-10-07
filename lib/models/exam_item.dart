@@ -38,7 +38,6 @@ class ExamItem extends StatelessWidget {
         height: 200,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          //color: _color,
           gradient: LinearGradient(
             colors: [
               _color,
@@ -75,8 +74,14 @@ class ExamItem extends StatelessWidget {
                   ),
                   Expanded(
                     child: ListTile(
-                      title: Text(_exam.subject),
-                      subtitle: const Text("15 question"),
+                      title: Text(
+                        _exam.subject,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      subtitle: Text(
+                        "15 question",
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
                     ),
                   ),
                 ],

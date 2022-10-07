@@ -1,3 +1,4 @@
+import 'package:e_learning/screens/start.dart';
 import 'package:flutter/material.dart';
 import '../api/api.dart';
 import '../api/exam.dart';
@@ -16,7 +17,12 @@ class Home extends StatelessWidget {
     final List<Exam> exams = _api.exams;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ltuc subjects"),
+        leading: IconButton(
+          icon: Icon(Icons.power_settings_new),
+          onPressed: () => Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Start())),
+        ),
+        title: const Text("Ltuc courses"),
       ),
       body: FutureBuilder(
         future: _api.getExams(),
