@@ -3,7 +3,8 @@ import 'dart:convert';
 import './base_url.dart';
 
 class Question {
-  final String _qId,question,_subject;
+  final String _qId,_subject;
+  String question;
   Question(this._qId,this.question,this._subject);
 
   final List<Map<String,dynamic>> _choices = [];
@@ -13,7 +14,7 @@ class Question {
   
   Future getChoices() async {
     String? baseUrl = BaseUrl.baseUrl;
-    if(didIFetchChoices){
+    if(didIFetchChoices || (_qId == '8' && _subject =="English")){
       return;
     }
     _choices.clear();

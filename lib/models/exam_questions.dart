@@ -47,6 +47,14 @@ class _ExamQuestionsState extends State<ExamQuestions> {
     return const Icon(Icons.close, color: Colors.red);
   }
 
+  bool _checkReadingQuestion(int index) {
+    if (index == 7 && widget._exam.subject == "English") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -94,7 +102,7 @@ class _ExamQuestionsState extends State<ExamQuestions> {
                                 ],
                               ),
                             ),
-                            if (_checkAnswers)
+                            if (_checkAnswers && !_checkReadingQuestion(index))
                               _trueFalseAnswer(index, questions[index].choices)
                           ],
                         ),
@@ -102,7 +110,11 @@ class _ExamQuestionsState extends State<ExamQuestions> {
                         const SizedBox(
                           height: 20,
                         ),
-                        QuestionChoices(questions[index], index, _checkAnswers),
+                        QuestionChoices(
+                          questions[index],
+                          index,
+                          _checkAnswers,
+                        ),
                         const SizedBox(
                           height: 10,
                         ),
@@ -148,7 +160,8 @@ class _ExamQuestionsState extends State<ExamQuestions> {
                                 .pushReplacementNamed('/course');
                           }
                         },
-                        child: Text(widget._from == "Course" ? "Done" : "Go to course"),
+                        child: Text(
+                            widget._from == "Course" ? "Done" : "Go to course"),
                       ),
                     ),
                   ],

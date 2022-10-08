@@ -7,7 +7,7 @@ class GradeDialog extends StatelessWidget {
   GradeDialog(this._checkAnswers);
   final ExamAnswers _examAnswers = ExamAnswers.getInstance();
   String _evaluateLevel(int grade) {
-    String level = "Your level is : ";
+    String level = "And Your level is : ";
     if (grade <= 5) {
       level += "Weak";
     } else if (grade <= 10) {
@@ -35,17 +35,15 @@ class GradeDialog extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            Text(
+            const Text(
               "Your grade is",
-              
             ),
             Text(
-              "${_examAnswers.grade}/15",
+              "${_examAnswers.grade}/${_examAnswers.asnwers.length}",
               
             ),
             Text(
               _evaluateLevel(_examAnswers.grade),
-              
             ),
           ],
         ),

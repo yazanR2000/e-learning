@@ -17,9 +17,15 @@ class _QuestionChoicesState extends State<QuestionChoices> {
   late Future _choices;
   int? length;
   final ExamAnswers _examAnswers = ExamAnswers.getInstance();
+
+  bool? _isReadingQuestion = false;
   @override
   void initState() {
     super.initState();
+    if (widget._qNum == 7) {
+      _isReadingQuestion = true;
+      widget._question.question = widget._question.question.replaceAll('\\n', '\n\n');
+    }
     _choices = widget._question.getChoices();
     length = _examAnswers.asnwers[widget._qNum].choiceNum;
   }
@@ -39,71 +45,93 @@ class _QuestionChoicesState extends State<QuestionChoices> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget._question.question,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          const SizedBox(height: 15,),
-          Expanded(
-            child: FutureBuilder(
-              future: _choices,
-              builder: (_, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                final List<Map<String, dynamic>> choices =
-                    widget._question.choices;
-                return Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: List.generate(
-                        choices.length,
-                        (index) => Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                                color: const Color(0xffF0F5F9), width: 1),
-                          ),
-                          child: ListTile(
-                            onTap: widget._checkAnswers
-                                ? null
-                                : () {
-                                    setState(() {
-                                      length = index;
-                                      _examAnswers.updateAnswer(
-                                          length!, widget._qNum);
-                                    });
-                                  },
-                            title: Text(choices[index]['title']),
-                            textColor: const Color(0xffF0F5F9),
-                            trailing: widget._checkAnswers
-                                ? _trueFalseAnswer(index, choices)
-                                : Radio(
-                                    fillColor: MaterialStateColor.resolveWith(
-                                        (states) => const Color(0xffF0F5F9)),
-                                    groupValue: length,
-                                    value: index,
-                                    onChanged: (int? val) {
+          if (_isReadingQuestion!)
+            Expanded(
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        widget._question.question,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          if (!_isReadingQuestion!)
+            Text(
+              widget._question.question,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          if (!_isReadingQuestion!)
+            const SizedBox(
+              height: 15,
+            ),
+          if (!_isReadingQuestion!)
+            Expanded(
+              child: FutureBuilder(
+                future: _choices,
+                builder: (_, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  final List<Map<String, dynamic>> choices =
+                      widget._question.choices;
+                  return Center(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: List.generate(
+                          choices.length,
+                          (index) => Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: const Color(0xffF0F5F9),
+                                width: 1,
+                              ),
+                            ),
+                            child: ListTile(
+                              onTap: widget._checkAnswers
+                                  ? null
+                                  : () {
                                       setState(() {
-                                        length = val!;
+                                        length = index;
                                         _examAnswers.updateAnswer(
                                             length!, widget._qNum);
                                       });
                                     },
-                                  ),
+                              title: Text(choices[index]['title']),
+                              textColor: const Color(0xffF0F5F9),
+                              trailing: widget._checkAnswers
+                                  ? _trueFalseAnswer(index, choices)
+                                  : Radio(
+                                      fillColor: MaterialStateColor.resolveWith(
+                                          (states) => const Color(0xffF0F5F9)),
+                                      groupValue: length,
+                                      value: index,
+                                      onChanged: (int? val) {
+                                        setState(() {
+                                          length = val!;
+                                          _examAnswers.updateAnswer(
+                                              length!, widget._qNum);
+                                        });
+                                      },
+                                    ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
         ],
       ),
     );
