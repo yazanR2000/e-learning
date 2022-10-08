@@ -24,6 +24,7 @@ class _EditTextState extends State<EditText> {
     return TextField(
       controller: widget.controller,
       keyboardType: TextInputType.emailAddress,
+        obscureText: widget.pass ? showPassword : false,
       decoration: InputDecoration(
         suffixIcon: widget.pass
             ? IconButton(

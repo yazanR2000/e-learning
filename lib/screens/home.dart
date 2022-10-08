@@ -12,15 +12,17 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: const Icon(Icons.logout),
-        //   onPressed: () => Navigator.pushReplacement(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => const Start(),
-        //     ),
-        //   ),
-        // ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Start(),
+              ),
+            ),
+          ),
+        ],
         title: const Text("Ltuc courses"),
       ),
       body: FutureBuilder(
