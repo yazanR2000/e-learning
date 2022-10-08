@@ -19,22 +19,22 @@ class _EnglishCourseState extends State<EnglishCourse> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "english course",
-            style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 40),
+            "English course",
+            //style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 40),
           ),
           //backgroundColor: Color.fromARGB(255, 98, 163, 179),
           bottom: const TabBar(tabs: [
             Text(
-              "grammar",
-              style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 20),
+              "Grammar",
+              //style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 20),
             ),
             Text(
-              "reading",
-              style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 20),
+              "Reading",
+              //style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 20),
             ),
             Text(
-              "listening",
-              style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 20),
+              "Listening",
+              //style: TextStyle(fontFamily: "Kalam-Bold", fontSize: 20),
             ),
           ]),
         ),
