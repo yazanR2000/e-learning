@@ -22,6 +22,7 @@ class CourseItem extends StatelessWidget {
   void _whereToGo(BuildContext context) {
     if (_title.startsWith("L")) {
       if (_course == "English") {
+        Navigator.of(context).pushNamed('/english');
       } else {
         Navigator.of(context).pushNamed('/course_tutorial');
       }

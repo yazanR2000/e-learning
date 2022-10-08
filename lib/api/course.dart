@@ -12,6 +12,7 @@ class Course {
   String? get course => _course;
   set course(String? value) {
     _didIFetchInformation = false;
+    _didIFetchTutorial = false;
     _course = value;
   }
   Map<String,dynamic> _courseInformation = {};
@@ -19,20 +20,25 @@ class Course {
 
   final List<Tutorial> _tutorials = [];
   List<Tutorial> get tutorials => _tutorials;
-
+  
+  bool _didIFetchTutorial = false;
   Future getTutorial() async {
+    if(_didIFetchTutorial){
+      return;
+    }
     try {
       _tutorials.clear();
       final response = await http.get(
         Uri.parse("$baseUrl/Tutorials/$_course.json"),
       );
       final data = json.decode(response.body) as List<dynamic>;
-      print(data);
+      //print(data);
       data.forEach((element) {
         if (element != null) {
           _tutorials.add(Tutorial(_course!, element));
         }
       });
+      _didIFetchTutorial = true;
     } catch (err) {
       throw "err";
     }

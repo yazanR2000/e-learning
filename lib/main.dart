@@ -4,7 +4,7 @@ import './screens/home.dart';
 import './screens/selected_item_exam.dart';
 import './screens/course.dart';
 import './screens/course_tutorial.dart';
-
+import './screens/english-course.dart';
 void main() {
   runApp(MyApp());
 }
@@ -89,29 +89,16 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Kalam-Bold',
           ),
         ),
-      ),
+      ), 
       home: const Start(),
       routes: {
         '/selected_item_exam': (context) => SelectedItemExam(),
         '/course': (context) => Course(),
         '/course_tutorial': (context) => CourseTutorial(),
+        '/english' : (context) => const EnglishCourse(),
       },
     );
   }
 }
 
-// class Splash extends StatelessWidget {
-//   const Splash({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//         body: Center(
-//       child: Padding(
-//         padding: const EdgeInsets.all(15),
-//         child: Image.asset('images/quiztime.gif'),
-//       ),
-//     ));
-//   }
-// }
