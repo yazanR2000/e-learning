@@ -1,6 +1,7 @@
+import 'package:e_learning/screens/home.dart';
 import 'package:e_learning/screens/start.dart';
 import 'package:flutter/material.dart';
-import './screens/home.dart';
+//import './screens/home.dart';
 import './screens/selected_item_exam.dart';
 import './screens/course.dart';
 import './screens/course_tutorial.dart';
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ), 
-      home: const Start(),
+      home: Home(),
       routes: {
         '/selected_item_exam': (context) => SelectedItemExam(),
         '/course': (context) => Course(),
